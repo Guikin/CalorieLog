@@ -5,3 +5,6 @@ from django.http import HttpResponse
 
 def home(request):
     return render(request,'home.html')
+
+def tracker(request):
+    return render(request,'tracker.html')  
