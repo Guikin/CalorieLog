@@ -4,55 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <title>Calorie Log - Add Food</title>
 </head>
 <body>
-    <header>
-        <h1>Calorie Log</h1>
-        <div>
-            <a href="">Log In</a>
-            <a href="">Sign Up</a>
+    <nav class="relative container mx-auto p-6">
+        <div class="flex items-center justify-between">
+            <div class="pt-2">
+                <h1>CalorieLog</h1>
+            </div>
         </div>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="">Nutrition Tracker</a></li>
-            <li><a href="">My Recipes</a></li>
-            <li><a href="">Explore Foods</a></li>
-        </ul>
+        <div class="flex space-x-3">
+            <p>Hello, User</p>
+            <a href="">Sign Out</a>
+        </div>
     </nav>
-    <div class="container">
-        <div class="search-area">
-            <h2>Discover Foods</h2>
-            <input type="text" placeholder="Search the food database">
-            <button>Search</button>
-        </div>
-        <div class="results-and-nutrition">
-            <div class="results-containers">
-                <h3>Search Results</h3>
-                <div class="results"></div>
-            </div>
-            <form action="" method="POST" class="food-info">
-                <h3>Banana</h3>
-                <label>Add to</label>
-                <select name="meals" class="drop-down-meals">
-                    <option value="breakfast">Breakfast</option>
-                    <option value="lunch">Lunch</option>
-                    <option value="dinner">Dinner</option>
-                    <option value="snacks">Snacks</option>
-                </select>
-                <br>
-                <label>Serving size (g)</label>
-                <input type="text">
-                <br>
-                <label>Quantity</label>
-                <input type="number">
-                <button type="submit">Add entry</button>
-            </form>
-            <div class="food-nutrition">
-                
-            </div>
-        </div>
-    </div>
 </body>
 </html>
