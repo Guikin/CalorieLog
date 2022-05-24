@@ -4,14 +4,25 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Food,Meal,Goals
 
 # Create your views here.
 
 def home(request):
     return render(request,'home.html')
 
+
+#filtered all foods by meals for easier layout rendering
 def tracker(request):
-    return render(request,'tracker.html')
+    all_food=Food.objects.all()
+    breakfast = Meal.objects.get(id=1).food_set.all()
+    lunch = Meal.objects.get(id=2).food_set.all()
+    dinner = Meal.objects.get(id=3).food_set.all()
+    snack = Meal.objects.get(id=4).food_set.all()
+    return render(request,'tracker.html',{'breakfast':breakfast,'lunch':lunch, 'dinner':dinner,'snack':snack,'all_food':all_food})
+
+def explore(request):
+    return render (request,'explore.html')    
 
 
 # input this into the mainDataModel's(CreateView); below
