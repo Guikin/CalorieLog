@@ -78,8 +78,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'calorielog',
+<<<<<<< HEAD
         'USER': 'ziyad',
         'PASSWORD': 'zzcanada12'
+=======
+        # 'USER': 'vince',
+        # 'PASSWORD': 'dragon12'
+        # uncomment above lines to make it work
+>>>>>>> 308e93116e9e0f53fc431ebb96fe304cd350d874
     }
 }
 
@@ -93,9 +99,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
@@ -119,6 +122,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+LOGIN_REDIRECT_URL = '/' # need input
+LOGOUT_REDIRECT_URL = '/' # need input
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

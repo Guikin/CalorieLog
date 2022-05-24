@@ -1,8 +1,7 @@
 import requests
-
-api_url = 'https://api.calorieninjas.com/v1/recipe?query='
-query = 'mushroom risotto'
-response = requests.get(api_url + query, headers={'X-Api-Key': 'ORRHFQv5lyyiXX5IUN8dwg==jXOAvt1CW6wzwgfY'})
+query = 'italian wedding soup'
+api_url = 'https://api.api-ninjas.com/v1/recipe?query={}'.format(query)
+response = requests.get(api_url, headers={'X-Api-Key': 'ORRHFQv5lyyiXX5IUN8dwg==QG7GGZedGnedFum3'})
 if response.status_code == requests.codes.ok:
     print(response.text)
 else:
