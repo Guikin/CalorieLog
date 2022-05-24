@@ -22,8 +22,6 @@ class Meal(models.Model):
         choices=MEALS,
         default=MEALS[0][0]
     )
-
-
     def __str__(self):
      return f"{self.get_name_display()}"
 
@@ -38,10 +36,11 @@ class Food(models.Model):
     cholesterol=models.FloatField(default=0)
     protein=models.FloatField(default=0)
     carbohydrates=models.FloatField(default=0)
+    calories=models.FloatField(default=0)
 
     def __str__(self):
         return self.name
-        
+
     meal = models.ManyToManyField(Meal)    
 
 class Goals(models.Model):
