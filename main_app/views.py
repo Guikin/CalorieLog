@@ -66,29 +66,16 @@ def tracker(request):
         
 
     # filter by meals for better layout rendering
-    breakfast = Meal.objects.get(id=1).food_set.all()
-    lunch = Meal.objects.get(id=2).food_set.all()
-    dinner = Meal.objects.get(id=3).food_set.all()
-    snack = Meal.objects.get(id=4).food_set.all()
+    breakfast = Meal.objects.get(name='B').food_set.all()
+    lunch = Meal.objects.get(name='L').food_set.all()
+    dinner = Meal.objects.get(name='D').food_set.all()
+    snack = Meal.objects.get(name='S').food_set.all()
 
 
     return render(request,'tracker.html',{'breakfast':breakfast,'lunch':lunch, 'dinner':dinner,'snack':snack,'all_food':all_food ,'totalcal':totalcal, 'totalcarbs':totalcarbs,'totalfat':totalfat,'totalprotein':totalprotein,'totalsodium':totalsodium,'totalsugar':totalsugar,'goals':goals, 'remaining_cal':remaining_cal,'remaining_carbs':remaining_carbs,'remaining_protein':remaining_protein,'remaining_fat':remaining_fat, 'percent_protein':percent_protein,'percent_carbs':percent_carbs,'percent_fat':percent_fat ,'carbs_cal':carbs_cal,'protein_cal':protein_cal,'fat_cal':fat_cal}, )
 
 def explore(request):
     return render (request,'explore.html')    
-
-
-# input this into the mainDataModel's(CreateView); below
-    # def form_valid(self,form):
-    #     form.instance.user = self.request.user
-    #     return super().form_valid(form)
-
-# input this into the mainDataModel's_index(request)
-    # mainDataModels = MainDataModel.objects.filter(user=request.user)
-    # return render(request, 'mainDataModels/INDEX.html', { 'mainDataModels': mainDataModels})
-
-# remember to wrap variables in '@login_required' to protect the data
-# wrap class based views (CreateView, UpdateView etc..) in 'LoginRequiredMixin'
 
 def signup(request):
     error_message = ''
@@ -97,7 +84,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('After Signup whereeee??') # insert where to redirect
+            return redirect('login') # insert where to redirect
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
