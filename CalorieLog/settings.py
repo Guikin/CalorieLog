@@ -78,20 +78,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'calorielog',
-<<<<<<< HEAD
-        'USER': 'ziyad',
-        'PASSWORD': 'zzcanada12'
-=======
-<<<<<<< HEAD
-        # 'USER': 'vince',
-        # 'PASSWORD': 'dragon12'
-        # uncomment above lines to make it work
->>>>>>> 308e93116e9e0f53fc431ebb96fe304cd350d874
-=======
-        'USER': 'vince',
-        'PASSWORD': 'dragon12'
->>>>>>> b8d44304c0922de8740383f4910f2fd229d917fd
->>>>>>> 8b68fa26c5ad912750875bdc09cf3bd1573081bc
     }
 }
 
