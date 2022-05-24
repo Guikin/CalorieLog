@@ -8,31 +8,18 @@
     <title>Calorie Log - Add Food</title>
 </head>
 <body>
-    <header>
-        <h1>Calorie Log</h1>
-        <div>
-            <a href="">Log In</a>
-            <a href="">Sign Up</a>
-        </div>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="">Nutrition Tracker</a></li>
-            <li><a href="">My Recipes</a></li>
-            <li><a href="">Explore Foods</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <div class="search-area">
-            <h2>Discover Foods</h2>
-            <input type="text" placeholder="Search the food database">
-            <button type="submit">Search</button>
-        </div>
-        <div class="results-and-nutrition">
-            <div class="results-containers">
-                <h3>Search Results</h3>
-                <div class="results"></div>
+    <nav class="relative container mx-auto p-6">
+        <div class="flex items-center justify-between pb-5">
+            <div class="pt-2">
+                <a href="#" class="text-4xl font-bold">
+                    <span class="text-amber-500">Calorie</span> Log
+                </a>
             </div>
+<<<<<<< HEAD
+            <div class="flex space-x-7">
+                <a href="">Hello, User1234</a>
+                <a href="">Sign Out</a>
+=======
             <div class="food-info">
                 <h3>Banana</h3>
                 <label>Add to</label>
@@ -49,9 +36,70 @@
                 <label>Quantity</label>
                 <input type="number">
                 
+>>>>>>> 8b68fa26c5ad912750875bdc09cf3bd1573081bc
             </div>
-            <div class="food-nutrition">
-                
+        </div>
+        <div class="flex space-x-7">
+            <a href="" class="font-semibold hover:text-amber-500">Nutrition Tracker</a>
+            <a href="" class="font-semibold hover:text-amber-500">My Recipes</a>
+            <a href="" class="font-semibold hover:text-amber-500">Explore Food</a>
+        </div>
+    </nav>
+    <div class="relative container mx-auto pt-8 w-3/6">
+        <div class="text-2xl font-bold pb-3">Add Entry</div>
+        <input type="text" class="w-5/12 rounded" placeholder="Search the food database">
+        <button type="submit" class="ml-3 py-2 px-5 border border-amber-500 bg-amber-500 rounded-md">Search</button>
+    </div>
+    <div class="relative container mx-auto pt-8 w-3/6">
+        <div class="text-2xl font-semibold pb-3">Search Results</div>
+        <div class="flex">
+            <div class="w-6/12 border border-black rounded-md h-80 mr-8"></div>
+            <div class="w-3/12 border border-amber-300 bg-amber-200 rounded-md">
+                <div class="m-2">
+                    <div class="mb-4">
+                        <div class="text-lg font-semibold">Banana</div>
+                        <div class="text-base">100 calories</div>
+                    </div>
+                    <div class="flex justify-between mb-6">
+                        <label class="text-base">Add to</label>
+                        <select name="meals" class="py-1 rounded-md">
+                            <option value="breakfast">Breakfast</option>
+                            <option value="lunch">Lunch</option>
+                            <option value="dinner">Dinner</option>
+                            <option value="snacks">Snacks</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-between mb-6">
+                        <label class="text-base">Serving Size (g)</label>
+                        <input type="number" class="w-24 py-1 rounded-md">
+                    </div>
+                    <div class="flex justify-between mb-6">
+                        <label class="text-base">Quantity</label>
+                        <input type="number" class="w-16 py-1 rounded-md">
+                    </div>
+                    <button type="submit" class="border border-amber-500 bg-amber-500 rounded-lg py-1 px-7 block mx-auto mb-6">Add Entry</button>
+                    <div class="flex justify-between">
+                        <div class="m-3 bg-white p-2 rounded-lg w-full">
+                            <div class="text-base font-semibold">Nutrition Info</div>
+                            <div class="flex justify-between">
+                                <label class="text-base pl-2">Calories</label>
+                                <label class="text-base pr-2">100</label>
+                            </div>
+                            <div class="flex justify-between">
+                                <label class="text-base pl-2">Fat</label>
+                                <label class="text-base pr-2">20g</label>
+                            </div>
+                            <div class="flex justify-between">
+                                <label class="text-base pl-2">Carbohydrates</label>
+                                <label class="text-base pr-2">50g</label>
+                            </div>
+                            <div class="flex justify-between">
+                                <label class="text-base pl-2">Protein</label>
+                                <label class="text-base pr-2">3g</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

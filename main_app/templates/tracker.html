@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="w-1/2 m-auto">
+    <h3>Today</h3>
+    <div class="flex justify-around border-2 p-12 rounded-lg">
+        <canvas id="myChart" class="w-1/4"></canvas>
+
+        <div class="w-1/2 hidden lg:flex flex-col justify-evenly">
+            <div>
+                <h2>Carbs</h2>  
+                <div class="w3-light-grey w3-round-xxlarge">
+                    <div class="w3-container w3-round-xxlarge w3-yellow" style="width:45%">25%
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h2 class="">Fats</h2>
+                <div class="w3-light-grey w3-round-xxlarge "> 
+                    <div class="w3-container w3-round-xxlarge w3-aqua" style="width:15%">25%
+                    </div>
+                </div> 
+            </div>
+            
+            <div>
+                <h2 class="">Proteins</h2>
+                <div class="w3-light-grey w3-round-xxlarge "> 
+                    <div class="w3-container w3-round-xxlarge w3-red" style="width:65%">25%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tracker-table w-fit m-auto">
+    <table class="table-auto">
+        <thead>
+          <tr>
+            <th class="p-4">Meal</th>
+            <th class="p-4">Quantity<br>g</th>
+            <th class="p-4">Carbs<br>g</th>
+            <th class="p-4">Fat<br>g</th>
+            <th class="p-4">Protein<br>g</th>
+            <th class="p-4">Sodium<br>mg</th>
+            <th class="p-4">Sugar<br>g</th>
+            <th class="p-4"></th>
+          </tr>
+        </thead>
+        <tbody>
+
+            <!-- Breakfast -->
+            <tr>
+                <td class="p-4 font-bold">BreakFast</td>
+            </tr>
+            {% for food in breakfast %}
+            <tr class="border-b-2">
+            <td class="p-4 text-center">{{food.name}}</td>
+            <td class="p-4 text-center">{{food.quantity}}</td>
+            <td class="p-4 text-center">{{food.carbohydrates}}</td> 
+            <td class="p-4 text-center">{{food.fat}}</td> 
+            <td class="p-4 text-center">{{food.protein}}</td> 
+            <td class="p-4 text-center">{{food.sodium}}</td> 
+            <td class="p-4 text-center">{{food.sugar}}</td> 
+            
+            <td class="p-4 text-center">X</td> 
+          </tr>
+          {% endfor %}
+          <tr>
+              <td class="p-4 text-center">add entry</td>
+          </tr>
+
+
+          <!-- Lunch -->
+          <tr>
+            <td class="p-4 font-bold">Lunch</td>
+          </tr>
+          {% for food in lunch %}
+            <tr class="border-b-2">
+            <td class="p-4 text-center">{{food.name}}</td>
+            <td class="p-4 text-center">{{food.quantity}}</td>
+            <td class="p-4 text-center">{{food.carbohydrates}}</td> 
+            <td class="p-4 text-center">{{food.fat}}</td> 
+            <td class="p-4 text-center">{{food.protein}}</td> 
+            <td class="p-4 text-center">{{food.sodium}}</td> 
+            <td class="p-4 text-center">{{food.sugar}}</td> 
+             
+            <td class="p-4 text-center">X</td> 
+          </tr>
+          {% endfor %}
+          <tr>
+            <td class="p-4 text-center">add entry</td>
+          </tr>
+
+           <!-- dinner -->
+           <tr>
+            <td class="p-4 font-bold">dinner</td>
+          </tr>
+          {% for food in dinner %}
+            <tr class="border-b-2">
+            <td class="p-4 text-center">{{food.name}}</td>
+            <td class="p-4 text-center">{{food.quantity}}</td>
+            <td class="p-4 text-center">{{food.carbohydrates}}</td> 
+            <td class="p-4 text-center">{{food.fat}}</td> 
+            <td class="p-4 text-center">{{food.protein}}</td> 
+            <td class="p-4 text-center">{{food.sodium}}</td> 
+            <td class="p-4 text-center">{{food.sugar}}</td> 
+             
+            <td class="p-4 text-center">X</td> 
+          </tr>
+          {% endfor %}
+          <tr>
+            <td class="p-4 text-center">add entry</td>
+          </tr>
+
+           <!-- snack -->
+           <tr>
+            <td class="p-4 font-bold">snack</td>
+          </tr>
+          {% for food in snack %}
+            <tr class="border-b-2">
+            <td class="p-4 text-center">{{food.name}}</td>
+            <td class="p-4 text-center">{{food.quantity}}</td>
+            <td class="p-4 text-center">{{food.carbohydrates}}</td> 
+            <td class="p-4 text-center">{{food.fat}}</td> 
+            <td class="p-4 text-center">{{food.protein}}</td> 
+            <td class="p-4 text-center">{{food.sodium}}</td> 
+            <td class="p-4 text-center">{{food.sugar}}</td> 
+             
+            <td class="p-4 text-center">X</td> 
+          </tr>
+          {% endfor %}
+          <tr>
+            <td class="p-4 text-center">add entry</td>
+          </tr>
+
+          
+          
+         
+          
+          
+        </tbody>
+      </table>
+
+</div>
+<script>
+const ctx = document.getElementById('myChart');
+const myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Carbs', 'Fats', 'Proteins','others'],
+        datasets: [{
+            label: 'calorieTracker',
+            data: [6,4,2,10],
+            backgroundColor: [
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(174, 174, 174, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(174, 174, 174, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            hoverOffset: 4
+        }]
+    },
+});
+</script>
+{% endblock %}
+</body>
+</html>
