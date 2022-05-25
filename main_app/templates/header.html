@@ -1,0 +1,21 @@
+{% load static %}
+<nav class="relative container mx-auto p-6">
+    <div class="flex items-center justify-between pb-5">
+        <div class="pt-2">
+            <a href="#" class="text-4xl font-bold">
+                <span class="text-amber-500">Calorie</span> Log
+            </a>
+        </div>
+        <div class="flex space-x-7">
+            <a href="">Hello, User1234</a>
+            <a href="">Sign Out</a>
+        </div>
+    </div>
+    <div class="flex space-x-7">
+        <a href="{% url 'tracker' %}" class="font-semibold hover:text-amber-500">Nutrition Tracker</a>
+        <a href="" class="font-semibold hover:text-amber-500">My Recipes</a>
+        <a href="{% url 'add' %}" class="font-semibold hover:text-amber-500">Explore Food</a>
+    </div>
+</nav>
+{% block content %}
+{% endblock %}
