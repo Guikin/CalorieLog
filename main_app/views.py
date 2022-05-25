@@ -12,17 +12,16 @@ def home(request):
     print('test')
     return render(request,'home.html')
 
-
 #filtered all foods by meals for easier layout rendering
 def tracker(request):
-    all_food=Food.objects.all()
+    all_food = Food.objects.all()
     goals = Goals.objects.all()
-    totalcal=0
-    totalcarbs=0
-    totalfat=0
-    totalprotein=0
-    totalsodium=0
-    totalsugar=0
+    totalcal = 0
+    totalcarbs = 0
+    totalfat = 0
+    totalprotein = 0
+    totalsodium = 0
+    totalsugar = 0
 
     # calculates total of nutrients for total table
     for food in all_food:
@@ -72,7 +71,30 @@ def tracker(request):
     snack = Meal.objects.get(id=4).food_set.all()
 
 
-    return render(request,'tracker.html',{'breakfast':breakfast,'lunch':lunch, 'dinner':dinner,'snack':snack,'all_food':all_food ,'totalcal':totalcal, 'totalcarbs':totalcarbs,'totalfat':totalfat,'totalprotein':totalprotein,'totalsodium':totalsodium,'totalsugar':totalsugar,'goals':goals, 'remaining_cal':remaining_cal,'remaining_carbs':remaining_carbs,'remaining_protein':remaining_protein,'remaining_fat':remaining_fat, 'percent_protein':percent_protein,'percent_carbs':percent_carbs,'percent_fat':percent_fat ,'carbs_cal':carbs_cal,'protein_cal':protein_cal,'fat_cal':fat_cal}, )
+    return render(request,'tracker.html',{
+        'breakfast':breakfast,
+        'lunch':lunch, 
+        'dinner':dinner,
+        'snack':snack,
+        'all_food':all_food ,
+        'totalcal':totalcal, 
+        'totalcarbs':totalcarbs,
+        'totalfat':totalfat,
+        'totalprotein':totalprotein,
+        'totalsodium':totalsodium,
+        'totalsugar':totalsugar,
+        'goals':goals, 
+        'remaining_cal':remaining_cal,
+        'remaining_carbs':remaining_carbs,
+        'remaining_protein':remaining_protein,
+        'remaining_fat':remaining_fat, 
+        'percent_protein':percent_protein,
+        'percent_carbs':percent_carbs,
+        'percent_fat':percent_fat,
+        'carbs_cal':carbs_cal,
+        'protein_cal':protein_cal,
+        'fat_cal':fat_cal
+        },)
 
 def explore(request):
     return render (request,'explore.html')    
