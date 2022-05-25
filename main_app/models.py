@@ -4,11 +4,6 @@ from datetime import date
 from django.forms import CharField
 # Create your models here.
 
-# need to attach this to the main model
-# user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-# then in shell python manage.py makemigrations > python manage.py migrate
-
 MEALS = (
     ('B', 'Breakfast'),
     ('L', 'Lunch'),
@@ -22,6 +17,8 @@ class Meal(models.Model):
         choices=MEALS,
         default=MEALS[0][0]
     )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     def __str__(self):
      return f"{self.get_name_display()}"
 
@@ -37,7 +34,7 @@ class Food(models.Model):
     protein=models.FloatField(default=0)
     carbohydrates=models.FloatField(default=0)
     calories=models.FloatField(default=0)
-
+    
     def __str__(self):
         return self.name
 
