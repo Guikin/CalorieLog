@@ -167,8 +167,8 @@
             <!-- User Goals -->
             <tr>
                 <td></td>
-                {% for goal in goals %}
                 <td class="p-4 text-center font-bold">Your Daily goal</td>
+                {% for goal in goals %}
                 <td class="p-4 text-center border-b-2">{{goal.calories}}</td>
                 <td class="p-4 text-center border-b-2">{{goal.carbs}}</td>
                 <td class="p-4 text-center border-b-2">{{goal.fat}}</td>
@@ -207,6 +207,9 @@ const carbs_cal = JSON.parse(document.getElementById("carbs_cal").textContent);
 const protein_cal = JSON.parse(document.getElementById("protein_cal").textContent);
 const fat_cal = JSON.parse(document.getElementById("fat_cal").textContent);
 const goal_calories = JSON.parse(document.getElementById("goal.calories").textContent);
+
+
+
 const myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
