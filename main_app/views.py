@@ -14,8 +14,11 @@ def home(request):
 
 #filtered all foods by meals for easier layout rendering
 def tracker(request):
-    all_food = Food.objects.all()
-    goals = Goals.objects.all()
+
+    all_food = Food.objects.filter(user = request.user)
+    print(all_food)
+    goals = Goals.objects.filter(user= request.user)
+    print(goals)
     totalcal = 0
     totalcarbs = 0
     totalfat = 0
@@ -65,10 +68,10 @@ def tracker(request):
         
 
     # filter by meals for better layout rendering
-    breakfast = Meal.objects.get(name='B').food_set.all()
-    lunch = Meal.objects.get(name='L').food_set.all()
-    dinner = Meal.objects.get(name='D').food_set.all()
-    snack = Meal.objects.get(name='S').food_set.all()
+    breakfast = Meal.objects.get(name='B').food_set.filter(user=request.user)
+    lunch = Meal.objects.get(name='L').food_set.filter(user=request.user)
+    dinner = Meal.objects.get(name='D').food_set.filter(user=request.user)
+    snack = Meal.objects.get(name='S').food_set.filter(user=request.user)
 
 
     return render(request,'tracker.html',{
