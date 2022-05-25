@@ -25,8 +25,10 @@
             <div class="w-3/12 border border-amber-300 bg-amber-200 rounded-md">
                 <div class="m-2">
                     <div class="mb-4">
-                        <div class="text-lg font-semibold">Banana</div>
-                        <div class="text-base">100 calories</div>
+                        <div class="text-lg font-semibold">{{name}}
+
+                        </div>
+                        <div class="text-base">{{calories}} calories</div>
                     </div>
                     <div class="flex justify-between mb-6">
                         <label class="text-base">Add to</label>
@@ -39,7 +41,7 @@
                     </div>
                     <div class="flex justify-between mb-6">
                         <label class="text-base">Serving Size (g)</label>
-                        <input type="number" class="w-24 py-1 rounded-md">
+                        <input type="number" class="w-24 py-1 rounded-md" placeholder="{{serving_size_g}}">
                     </div>
                     <div class="flex justify-between mb-6">
                         <label class="text-base">Quantity</label>
@@ -51,19 +53,19 @@
                             <div class="text-base font-semibold">Nutrition Info</div>
                             <div class="flex justify-between">
                                 <label class="text-base pl-2">Calories</label>
-                                <label class="text-base pr-2">100</label>
+                                <label class="text-base pr-2">{{calories}}</label>
                             </div>
                             <div class="flex justify-between">
                                 <label class="text-base pl-2">Fat</label>
-                                <label class="text-base pr-2">20g</label>
+                                <label class="text-base pr-2">{{fat_total_g}}</label>
                             </div>
                             <div class="flex justify-between">
                                 <label class="text-base pl-2">Carbohydrates</label>
-                                <label class="text-base pr-2">50g</label>
+                                <label class="text-base pr-2">{{carbohydrates_total_g}}</label>
                             </div>
                             <div class="flex justify-between">
                                 <label class="text-base pl-2">Protein</label>
-                                <label class="text-base pr-2">3g</label>
+                                <label class="text-base pr-2">{{protein_g}}</label>
                             </div>
                         </div>
                     </div>

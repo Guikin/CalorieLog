@@ -22,7 +22,21 @@ def tracker(request):
     return render(request,'tracker.html',{'breakfast':breakfast,'lunch':lunch, 'dinner':dinner,'snack':snack,'all_food':all_food})
 
 def add(request):
-    return render(request, 'add.html')
+    empty_dict = {
+                    'sugar_g': '', 
+                    'fiber_g': '', 
+                    'serving_size_g': '', 
+                    'sodium_mg': '', 
+                    'name': '---', 
+                    'potassium_mg': '',
+                    'fat_saturated_g': '',
+                    'fat_total_g': '-g',
+                    'calories': '--',
+                    'cholesterol_mg': '',
+                    'protein_g': '-g',
+                    'carbohydrates_total_g': '-g'
+                }
+    return render(request, 'add.html', empty_dict)
 
 def search(request):
     query = request.GET['query']
@@ -33,8 +47,25 @@ def search(request):
         "X-RapidAPI-Key": "b7cdab9648msh48c8c9f16a4b05dp1a5a8ajsn60e2f660bcac"
     }
     response = requests.request("GET", url, headers=headers, params=querystring)
-    print(response.json()['potassium_mg'])
-    return render(request, 'add.html', response.json)
+    dictionary = json.loads(response.text)
+    items = dictionary['items'][0]
+    if not items:
+        items = {
+                    'sugar_g': '', 
+                    'fiber_g': '', 
+                    'serving_size_g': '', 
+                    'sodium_mg': '', 
+                    'name': '---', 
+                    'potassium_mg': '',
+                    'fat_saturated_g': '',
+                    'fat_total_g': '-g',
+                    'calories': '--',
+                    'cholesterol_mg': '',
+                    'protein_g': '-g',
+                    'carbohydrates_total_g': '-g'
+        }
+    print(items)
+    return render(request, 'add.html', items)
     
     
 

@@ -9,5 +9,3 @@ def get(query):
 	}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	return response.json()
-
-print(get('tomato'))
