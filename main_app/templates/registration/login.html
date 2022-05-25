@@ -1,16 +1,8 @@
 {% extends 'base.html'%}
 {% block content %}
 
-<<<<<<< HEAD
-<h1>Login</h1>
 
-<form method="POST" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ form.as_p}}
-    <input type="submit" class="btn bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-xl px-20 py-3 rounded w-72" value="login">
-    <input type="hidden" class="next" value="{{ next }}">
-</form>
-=======
+
 <h1 class="text-center pt-32 text-xl font-bold">Member Login</h1>
 
 <div class="flex justify-around flex-row-reverse m-auto w-1/2 items-center pt-6">
@@ -32,6 +24,6 @@
         </form>
     </div>
 </div>
->>>>>>> 18c1f88063c443d320dbcc7a51b481baf286bf21
+
 
 {% endblock %}
