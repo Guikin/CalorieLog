@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Food,Meal,Goals
+from django.views.generic.edit import UpdateView
 
 # Create your views here.
 
@@ -115,3 +116,8 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+class GoalsUpdate(UpdateView):
+    model = Goals
+    fields = ['calories', 'carbs', 'fat', 'protein']
+    success_url = '/tracker/'
