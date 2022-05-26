@@ -36,9 +36,9 @@ def add(request):
                     'protein_g': '-g',
                     'carbohydrates_total_g': '-g'
                 }
-    return render(request, 'add.html', empty_dict)
+    return render(request, 'add.html')
 
-def search(request):
+""" def search(request):
     query = request.GET['query']
     url = "https://calorieninjas.p.rapidapi.com/v1/nutrition"
     querystring = {"query":query}
@@ -65,7 +65,39 @@ def search(request):
                     'carbohydrates_total_g': '-g'
         }
     print(items)
-    return render(request, 'add.html', items)
+    return render(request, 'add.html', items) """
+
+def search(request):
+    query = request.GET['query']
+    apiKey = 'pbtYsqSI82E2sTITqV3NBEeBUwsun0ifPoP5cs5a'
+    response = requests.get('https://api.nal.usda.gov/fdc/v1/foods/search?api_key=' + apiKey + '&query=' + query)
+    foods = []
+    result = json.loads(response.text)
+    for item in result['foods']:
+        dictionary = {}
+        dictionary['name'] = item['description']
+        dictionary['id'] = item['fdcId']
+        foods.append(dictionary)
+        if len(foods) > 50: break
+    return render(request, 'add.html', {'food_dict':foods})
+
+def display(request, id):
+    apiKey = 'pbtYsqSI82E2sTITqV3NBEeBUwsun0ifPoP5cs5a'
+    response = requests.get('https://api.nal.usda.gov/fdc/v1/food/' + str(id) + '?api_key=' + apiKey)
+    result = json.loads(response.text)
+    nutrients = {}
+    nutrients['name'] = result['description']
+    nutrients['serving_size'] = '100'
+    for i in result['foodNutrients']:
+        if i['nutrient']['name'] == 'Total lipid (fat)':
+            nutrients['fat'] = i['amount']
+        if i['nutrient']['name'] == 'Energy' and i['nutrient']['unitName'] == 'kcal':
+            nutrients['calories'] = i['amount']
+        if i['nutrient']['name'] == 'Carbohydrate, by difference':
+            nutrients['carbs'] = i['amount']
+        if i['nutrient']['name'] == 'Protein':
+            nutrients['protein'] = i['amount']
+    return render(request, 'add.html', nutrients)
     
     
 
