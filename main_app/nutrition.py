@@ -1,14 +1,32 @@
 import requests
+import json
 
-url = "https://calorieninjas.p.rapidapi.com/v1/nutrition"
+""" apiKey = 'pbtYsqSI82E2sTITqV3NBEeBUwsun0ifPoP5cs5a'
+response = requests.get('https://api.nal.usda.gov/fdc/v1/foods/search?api_key=' + apiKey + '&query=pear')
+foods = []
+result = json.loads(response.text)
+for item in result['foods']:
+    foods.append(item['description'])
+    foods.append(item['fdcId'])
+    if len(foods) > 50: break
+it = iter(foods)
+food_dict = dict(zip(it, it)) """
 
-querystring = {"query":"onion and tomato"}
 
-headers = {
-	"X-RapidAPI-Host": "calorieninjas.p.rapidapi.com",
-	"X-RapidAPI-Key": "b7cdab9648msh48c8c9f16a4b05dp1a5a8ajsn60e2f660bcac"
-}
+apiKey = 'pbtYsqSI82E2sTITqV3NBEeBUwsun0ifPoP5cs5a'
+response = requests.get('https://api.nal.usda.gov/fdc/v1/food/167750?api_key=' + apiKey)
+result = json.loads(response.text)
+nutrients = {}
+nutrients['name'] = result['description']
+nutrients['serving_size'] = '100'
+for i in result['foodNutrients']:
+    if i['nutrient']['name'] == 'Total lipid (fat)':
+        nutrients['fat'] = i['amount']
+    if i['nutrient']['name'] == 'Energy' and i['nutrient']['unitName'] == 'kcal':
+        nutrients['calories'] = i['amount']
+    if i['nutrient']['name'] == 'Carbohydrate, by difference':
+        nutrients['carbs'] = i['amount']
+    if i['nutrient']['name'] == 'Protein':
+        nutrients['protein'] = i['amount']
 
-response = requests.request("GET", url, headers=headers, params=querystring)
-
-print(response.json())
+print(nutrients)

@@ -5,17 +5,18 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Food,Meal,Goals
+
+import requests
+import json
 from django.views.generic.edit import UpdateView
 
 # Create your views here.
-
 def home(request):
     print('test')
     return render(request,'home.html')
 
 #filtered all foods by meals for easier layout rendering
 def tracker(request):
-
     all_food = Food.objects.filter(user = request.user)
     goals = Goals.objects.filter(user= request.user)
     if len(goals)== 0:
@@ -58,6 +59,7 @@ def tracker(request):
     percent_protein = 0
     percent_carbs = 0
     percent_fat = 0
+
 
     # calculates perentage for progress bar
     if len(goals)!=0 and len(all_food)!=0:
@@ -127,6 +129,46 @@ def tracker(request):
         'no_snack':no_snack
         },)
 
+
+
+def add(request):
+    return render(request, 'add.html')
+
+
+def search(request):
+    query = request.GET['query']
+    apiKey = 'pbtYsqSI82E2sTITqV3NBEeBUwsun0ifPoP5cs5a'
+    response = requests.get('https://api.nal.usda.gov/fdc/v1/foods/search?api_key=' + apiKey + '&query=' + query)
+    foods = []
+    result = json.loads(response.text)
+    for item in result['foods']:
+        dictionary = {}
+        dictionary['name'] = item['description']
+        dictionary['id'] = item['fdcId']
+        foods.append(dictionary)
+        if len(foods) > 50: break
+    return render(request, 'add.html', {'food_dict':foods})
+
+def display(request, id):
+    apiKey = 'pbtYsqSI82E2sTITqV3NBEeBUwsun0ifPoP5cs5a'
+    response = requests.get('https://api.nal.usda.gov/fdc/v1/food/' + str(id) + '?api_key=' + apiKey)
+    result = json.loads(response.text)
+    nutrients = {}
+    nutrients['name'] = result['description']
+    nutrients['serving_size'] = '100'
+    for i in result['foodNutrients']:
+        if i['nutrient']['name'] == 'Total lipid (fat)':
+            nutrients['fat'] = i['amount']
+        if i['nutrient']['name'] == 'Energy' and i['nutrient']['unitName'] == 'kcal':
+            nutrients['calories'] = i['amount']
+        if i['nutrient']['name'] == 'Carbohydrate, by difference':
+            nutrients['carbs'] = i['amount']
+        if i['nutrient']['name'] == 'Protein':
+            nutrients['protein'] = i['amount']
+    return render(request, 'add.html', nutrients)
+    
+    
+    
 def explore(request):
     return render (request,'explore.html')    
 
