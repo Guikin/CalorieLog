@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
+
+
 {% block content %}
 
 
+{% include 'navbar.html' %}
 
-<div class="w-1/2 m-auto">
+<div class="w-full sm:w-1/2 m-auto">
     <h3>Today</h3>
-    <div class="flex justify-around border-2 p-12 rounded-lg">
-        <canvas id="myChart" class="w-1/4"></canvas>
+    <div class="sm:flex justify-around border-2 p-12 rounded-lg">
+        <canvas id="myChart" class="md:w-1/4"></canvas>
 
-        <div class="w-1/2 hidden lg:flex flex-col justify-evenly">
+        <div class="sm:w-1/2 lg:flex flex-col justify-evenly">
             <div>
                 <h2 class="px-2">Carbohydrates</h2>  
                 <div class="w3-light-grey w3-round-xxlarge">
@@ -32,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <button class="bg-blue-500 w-32 rounded-lg text-white hover:bg-blue-800"><a href="{% url 'goals_update' user.id %}">Edit Goals</a></button>
+            <button class="bg-blue-500 p-2 w-32 rounded-lg text-white hover:bg-blue-800"><a href="{% url 'goals_update' user.id %}">Edit Goals</a></button>
         </div>
     </div>
 </div>
@@ -93,8 +96,9 @@
             <td class="p-4 text-center">{{food.protein}}</td> 
             <td class="p-4 text-center">{{food.sodium}}</td> 
             <td class="p-4 text-center">{{food.sugar}}</td> 
-             
-            <td class="p-4 text-center">X</td> 
+            
+           
+          
           </tr>
           {% endfor %}
           <tr class="border-t-2">
@@ -213,7 +217,11 @@ const ctx = document.getElementById('myChart');
 const carbs_cal = JSON.parse(document.getElementById("carbs_cal").textContent);
 const protein_cal = JSON.parse(document.getElementById("protein_cal").textContent);
 const fat_cal = JSON.parse(document.getElementById("fat_cal").textContent);
-const goal_calories = JSON.parse(document.getElementById("goal.calories").textContent);
+let goal_calories = JSON.parse(document.getElementById("goal.calories").textContent);
+
+if(goal_calories===0){
+  goal_calories=1
+}
 
 const myChart = new Chart(ctx, {
     type: 'doughnut',

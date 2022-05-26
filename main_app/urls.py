@@ -8,6 +8,7 @@ urlpatterns=[
     path('add/', views.add, name='add'),
     path('search/', views.search, name='search'),
     path('view/<int:id>/', views.display, name='view'),
+    # path('tracker/<int:food_id>/delete',views.delete, name='delete_food'),
 
     # Auth
     path('accounts/signup/', views.signup, name='signup'),

@@ -15,13 +15,17 @@ def home(request):
     print('test')
     return render(request,'home.html')
 
+# def delete(request):
+#     pass    
+
 #filtered all foods by meals for easier layout rendering
 def tracker(request):
     all_food = Food.objects.filter(user = request.user)
     goals = Goals.objects.filter(user= request.user)
-    if len(goals)== 0:
+    if len(goals) == 0:
         init_goal = Goals.objects.create(user=request.user)
         init_goal.save()
+    goals = Goals.objects.filter(user= request.user)    
     totalcal = 0
     totalcarbs = 0
     totalfat = 0
@@ -68,15 +72,19 @@ def tracker(request):
             remaining_carbs = goal.carbs - totalcarbs 
             remaining_protein = goal.protein - totalprotein
             remaining_fat = goal.fat - totalfat
-            percent_protein = round(totalprotein/goal.protein *100)
-            percent_carbs = round(totalcarbs/goal.carbs *100)
-            percent_fat = round(totalfat/goal.fat *100)
+            if(goal.protein != 0):
+             percent_protein = round(totalprotein/goal.protein *100)
+            if(goal.carbs !=0):
+             percent_carbs = round(totalcarbs/goal.carbs *100)
+            if(goal.fat): 
+             percent_fat = round(totalfat/goal.fat *100)
         
 
     no_breakfast = None        
     no_lunch = None        
     no_dinner = None        
-    no_snack = None        
+    no_snack = None
+            
     # filter by meals for better layout rendering
     breakfast = Meal.objects.get(name='B').food_set.filter(user=request.user)
     if len(breakfast)==0:
@@ -99,6 +107,7 @@ def tracker(request):
     else:
         no_snack=False
 
+       
     return render(request,'tracker.html',{
         'breakfast':breakfast,
         'lunch':lunch, 
