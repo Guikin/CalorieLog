@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{% block content %}
+
+
+<h1 class="text-center pt-32 text-xl font-bold">Member Login</h1>
+
+<div class="flex justify-around flex-row-reverse m-auto w-1/2 items-center pt-6">
+    <div class="flex flex-col justify-center lg:justify-start">
+        <form method="POST" action "{% url 'login' %}">
+            {% csrf_token %}
+    
+            <p class="text-sm">username</p>
+            <input class="form-control block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded" placeholder="Enter username"
+            id="exampleFormControlInput2" type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+            
+            <p class="pt-5 text-sm">password</p>
+            <input class="form-control block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded" placeholder="Enter password"
+            id="exampleFormControlInput2" type="password" name="password" autocomplete="current-password" required id="id_password">
+
+            <p class="pt-8"></p>
+            <input type="submit" class="btn bg-yellow-400 hover:bg-yellow-300 text-black text-sm block w-full px-4 py-2 rounded w-72" value="Log In">
+            <input type="hidden" class="next" value="{{ next }}">
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -10,5 +10,7 @@ urlpatterns=[
     path('view/<int:id>/', views.display, name='view'),
 
     # Auth
-    path('accounts/signup/', views.signup, name='signup')
+    path('accounts/signup/', views.signup, name='signup'),
+    
+    path('goals/<int:pk>/update/', views.GoalsUpdate.as_view(), name='goals_update')
 ]

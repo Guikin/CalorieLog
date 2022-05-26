@@ -1,0 +1,29 @@
+[
+    {
+      "model": "Meal",
+      "pk": 1,
+      "fields": {
+        "name": "B"
+      }
+    },
+    {
+      "model": "Meal",
+      "pk": 2,
+      "fields": {
+        "name": "L"
+      }
+    },
+    {
+        "model": "Meal",
+        "pk": 3,
+        "fields": {
+          "name": "D"
+        }
+      },{
+        "model": "Meal",
+        "pk": 4,
+        "fields": {
+          "name": "S"
+        }
+      }
+  ]
