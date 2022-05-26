@@ -17,7 +17,6 @@ class Meal(models.Model):
         choices=MEALS,
         default=MEALS[0][0]
     )
-    
 
     def __str__(self):
      return f"{self.get_name_display()}"
@@ -47,7 +46,6 @@ class Goals(models.Model):
     carbs=models.FloatField(default=0)
     fat=models.FloatField(default=0)
     protein=models.FloatField(default=0)
-
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):

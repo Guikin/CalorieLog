@@ -131,6 +131,7 @@
            <tr >
             <td class="p-4 font-bold text-center">Snack</td>
           </tr>
+          {% if not no_snack %}
           {% for food in snack %}
             <tr class="border-b-2">
             <td class="p-4 text-center">{{food.name}}</td>
@@ -141,10 +142,12 @@
             <td class="p-4 text-center">{{food.protein}}</td> 
             <td class="p-4 text-center">{{food.sodium}}</td> 
             <td class="p-4 text-center">{{food.sugar}}</td> 
-             
             <td class="p-4 text-center">X</td> 
           </tr>
           {% endfor %}
+          {% else %}
+           <tr><td class="text-center font-bold" colspan="8">No snacks has been added</td></tr>
+           {% endif %}
           <tr class="border-t-2 border-b-2">
             <td class="p-4 text-center"> <button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
                 Add Entry +
@@ -206,6 +209,7 @@
 </div>
 <script>
 const ctx = document.getElementById('myChart');
+
 const carbs_cal = JSON.parse(document.getElementById("carbs_cal").textContent);
 const protein_cal = JSON.parse(document.getElementById("protein_cal").textContent);
 const fat_cal = JSON.parse(document.getElementById("fat_cal").textContent);
@@ -214,7 +218,7 @@ const goal_calories = JSON.parse(document.getElementById("goal.calories").textCo
 const myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-        labels: ['Carbs', 'Fats', 'Proteins','others'],
+        labels: ['Carbs','Fats', 'Proteins','others'],
         datasets: [{
             label: 'calorieTracker',
             
