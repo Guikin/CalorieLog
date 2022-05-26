@@ -185,23 +185,42 @@ def display(request, id):
 def append(request):
     if request.POST:
         data = request.POST.dict()
+        if data['meals'] == 'breakfast':
+            data['meals'] = 'B'
+        elif data['meals'] == 'lunch':
+            data['meals'] = 'L'
+        elif data['meals'] == 'dinner':
+            data['meals'] = 'D'
+        else:
+            data['meals'] = 'S'
+        meal=Meal.objects.get(name=data['meals']).food_set.create(
+            name=data['food_name'],
+            sugar=data['sugar'],
+            sodium=data['sodium'],
+            fiber=data['fiber'],
+            quantity= str(int(data['quantity'])*int(data['serving'])),
+            fat=data['fats'],
+            cholesterol=data['cholesterol'],
+            protein=data['protein'],
+            carbohydrates=data['carbs'],
+            calories=data['calories'],
+            user=request.user)
         # food = Food.objects.create(
         #     name=data['food_name'],
         #     sugar=data['sugar'],
         #     sodium=data['sodium'],
         #     fiber=data['fiber'],
-        #     quantity=data['quantity'],
+        #     quantity= str(int(data['quantity'])*int(data['serving'])),
         #     fat=data['fats'],
         #     cholesterol=data['cholesterol'],
         #     protein=data['protein'],
         #     carbohydrates=data['carbs'],
         #     calories=data['calories'],
         #     user=request.user,
-        #     meal=data['meals']
         # )
-        print(data)
+        print(meal)
         
-    return render(request, 'add.html')
+    return redirect('/tracker/')
     
     
     
