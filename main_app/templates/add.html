@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Calorie Log - Add Food</title>
-</head>
-<body>
-    {% extends 'header.html' %}
-    {% block content %}
-    <div class="relative container mx-auto pt-8 w-3/6">
+{% extends 'base.html' %}
+
+
+{% block content %}
+    
+        {% include 'navbar.html' %}
+    </nav>
+    <div class="container mx-auto pt-8 w-3/6">
         <div class="text-2xl font-bold pb-3">Add Entry</div>
         <form method="GET", action="{% url 'search' %}">
             {% csrf_token %}
@@ -91,6 +85,8 @@
             </div>
         </div>
     </div>
+
+    {% endblock %}
     <script>
         let dynamics = document.getElementsByClassName("dynamic")
         let initials = []
@@ -110,6 +106,6 @@
             } 
         })
     </script>
-    {% endblock %}
+    
 </body>
 </html>

@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CalorieLog</title>
 </head>
-<body>
+<body class="">
         
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="flex justify-around m-auto w-1/2 items-center pt-20">
-    <div class="mx-6">
-        <p class="font-bold text-xl">Track your nutrition, stick to your wellness goals!</p>
-        <button class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-xl px-20 py-3 rounded w-72"><a href="{% url 'signup' %}">Sign Up</a></button>
+<div class="sm:flex block  justify-around m-auto w-1/2 items-center mt-56">
+    <div class="">
+        <p class="font-bold text-3xl my-6">Track your nutrition,<br> stick to your wellness goals!</p>
+        <button class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-xl px-20 py-3 rounded w-72 my-6"><a href="{% url 'signup' %}">Sign Up</a></button>
         <div>
-            <p class="text-sm">Already Have an account?</p>
-            <a class="text-sm text-blue-400 underline hover:text-blue-200" href="{% url 'login' %}">Log In</a>
+            <p class="text-sm my-2">Already Have an account?</p>
+            <a class="text-sm my-2 text-blue-400 underline hover:text-blue-200" href="{% url 'login' %}">Log In</a>
         </div>
         
     </div>
-    <img src="https://cdn.discordapp.com/attachments/775223081722839083/978126051156832276/image1.png">
+    <img class="mx-6" width="500" src="https://cdn.discordapp.com/attachments/775223081722839083/978126051156832276/image1.png">
 </div>
 
 {% endblock %}

@@ -34,7 +34,7 @@ class Food(models.Model):
     carbohydrates=models.FloatField(default=0)
     calories=models.FloatField(default=0)
     
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -46,7 +46,7 @@ class Goals(models.Model):
     carbs=models.FloatField(default=0)
     fat=models.FloatField(default=0)
     protein=models.FloatField(default=0)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     
     def __str__(self):
         return f"cal={self.calories},carbs={self.carbs},far={self.fat},protein={self.protein}" 
