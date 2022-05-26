@@ -32,48 +32,61 @@
             </div>
             <div class="w-3/12 border border-amber-300 bg-amber-200 rounded-md">
                 <div class="m-2">
-                    <div class="mb-4">
-                        <div class="text-lg font-semibold">{{name|default:'---'}}</div>
-                        <div class="text-base"><span class="dynamic">{{calories|default:'---'}}</span> calories</div>
-                    </div>
-                    <div class="flex justify-between mb-6">
-                        <label class="text-base">Add to</label>
-                        <select name="meals" class="py-1 rounded-md">
-                            <option value="breakfast">Breakfast</option>
-                            <option value="lunch">Lunch</option>
-                            <option value="dinner">Dinner</option>
-                            <option value="snacks">Snacks</option>
-                        </select>
-                    </div>
-                    <div class="flex justify-between mb-6">
-                        <label class="text-base">Serving Size (g)</label>
-                        <input type="number" id="serving" class="w-24 py-1 rounded-md" value="{{serving_size}}">
-                    </div>
-                    <div class="flex justify-between mb-6">
-                        <label class="text-base">Quantity</label>
-                        <input type="number" id="quantity" class="w-16 py-1 rounded-md" value="1">
-                    </div>
-                    <button type="submit" class="border border-amber-500 bg-amber-500 rounded-lg py-1 px-7 block mx-auto mb-6 hover:bg-amber-600">Add Entry</button>
-                    <div class="flex justify-between">
-                        <div class="m-3 bg-white p-2 rounded-lg w-full">
-                            <div class="text-base font-semibold">Nutrition Info</div>
-                            <div class="flex justify-between">
-                                <label class="text-base pl-2">Calories</label>
-                                <label class="text-base pr-2 dynamic">{{calories|default:'--'}}</label>
-                            </div>
-                            <div class="flex justify-between">
-                                <label class="text-base pl-2">Fat</label>
-                                <label class="text-base pr-2"><span class="dynamic">{{fat|default:'-'}}</span>g</label>
-                            </div>
-                            <div class="flex justify-between">
-                                <label class="text-base pl-2">Carbohydrates</label>
-                                <label class="text-base pr-2"><span class="dynamic">{{carbs|default:'-'}}</span>g</label>
-                            </div>
-                            <div class="flex justify-between">
-                                <label class="text-base pl-2">Protein</label>
-                                <label class="text-base pr-2"><span class="dynamic">{{protein|default:'-'}}</span>g</label>
+                    <form method="POST" action="{% url 'append' %}">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <div class="text-lg font-semibold">{{name|default:'---'}}</div>
+                            <div class="text-base"><span class="dynamic">{{calories|default:'---'}}</span> calories</div>
                         </div>
-                    </div>
+                        <div class="flex justify-between mb-6">
+                            <label class="text-base">Add to</label>
+                            <select name="meals" class="py-1 rounded-md">
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                                <option value="snacks">Snacks</option>
+                            </select>
+                        </div>
+                        <div class="flex justify-between mb-6">
+                            <label class="text-base">Serving Size (g)</label>
+                            <input type="number" id="serving" name="serving" class="w-24 py-1 rounded-md" value="{{serving_size}}">
+                        </div>
+                        <div class="flex justify-between mb-6">
+                            <label class="text-base">Quantity</label>
+                            <input type="number" id="quantity" name="quantity" class="w-16 py-1 rounded-md" value="1">
+                        </div>
+                        <div class="flex justify-between">
+                            <div class="m-3 bg-white p-2 rounded-lg w-full">
+                                <div class="text-base font-semibold">Nutrition Info</div>
+                                <div class="flex justify-between">
+                                    <label class="text-base pl-2">Calories</label>
+                                    <input type="text" disabled name="calories" class="dynamic w-20 h-6 border-none text-right" value="{{calories|default:'--'}}">
+                                </div>
+                                <div class="flex justify-between">
+                                    <label class="text-base pl-2">Fat</label>
+                                    <input type="text" disabled name="fats" class="dynamic w-20 h-6 border-none text-right" value="{{fat|default:'-'}}">
+                                </div>
+                                <div class="flex justify-between">
+                                    <label class="text-base pl-2">Carbs</label>
+                                    <input type="text" disabled name="carbs" class="dynamic w-20 h-6 border-none text-right" value="{{carbs|default:'-'}}">
+                                </div>
+                                <div class="flex justify-between">
+                                    <label class="text-base pl-2">Protein</label>
+                                    <input type="text" disabled name="protein" class="dynamic w-20 h-6 border-none text-right" value="{{protein|default:'-'}}">
+                                </div>
+                                <input type="text" name="sodium" class="dynamic" hidden value="{{sodium|default:'0'}}">
+                                <input type="text" name="sugar" class="dynamic" hidden value="{{sugar|default:'0'}}">
+                                <input type="text" name="cholesterol" class="dynamic" hidden value="{{cholesterol|default:'0'}}">
+                                <input type="text" name="fiber" class="dynamic" hidden value="{{fiber|default:'0'}}">
+                                <input type="text" name="food_name" class="dynamic" hidden value="{{name|default:'query'}}">
+                                <input type="text" name="calories" class="dynamic" hidden value="{{calories|default:'--'}}">
+                                <input type="text" name="fats" class="dynamic" hidden value="{{fat|default:'--'}}">
+                                <input type="text" name="carbs" class="dynamic" hidden value="{{carbs|default:'--'}}">
+                                <input type="text" name="protein" class="dynamic" hidden value="{{protein|default:'--'}}">
+                            </div>
+                        </div>
+                        <button type="submit" class="border border-amber-500 bg-amber-500 rounded-lg py-1 px-7 block mx-auto mb-6 hover:bg-amber-600">Add Entry</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -82,18 +95,18 @@
         let dynamics = document.getElementsByClassName("dynamic")
         let initials = []
         for(let i = 0; i < dynamics.length; i++){
-            initials.push(dynamics[i].textContent)
+            initials.push(dynamics[i].value)
         }
         let serving = document.getElementById("serving")
         let quantity = document.getElementById("quantity")
         $("#serving").on("change keyup paste", function(){
             for(let i = 0; i < dynamics.length; i++){
-                dynamics[i].textContent = '' + Math.round(Number(initials[i]) * (Number(serving.value)/100) * Number(quantity.value) * 100) / 100
+                dynamics[i].value = '' + Math.round(Number(initials[i]) * (Number(serving.value)/100) * Number(quantity.value) * 100) / 100
             } 
         })
         $("#quantity").on("change keyup paste", function(){
             for(let i = 0; i < dynamics.length; i++){
-                dynamics[i].textContent = '' + Math.round(Number(initials[i]) * (Number(serving.value)/100) * Number(quantity.value) * 100) / 100
+                dynamics[i].value = '' + Math.round(Number(initials[i]) * (Number(serving.value)/100) * Number(quantity.value) * 100) / 100
             } 
         })
     </script>

@@ -8,6 +8,7 @@ urlpatterns=[
     path('add/', views.add, name='add'),
     path('search/', views.search, name='search'),
     path('view/<int:id>/', views.display, name='view'),
+    path('append/', views.append, name='append'),
 
     # Auth
     path('accounts/signup/', views.signup, name='signup'),
