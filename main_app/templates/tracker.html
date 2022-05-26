@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+
+
 {% block content %}
 
 
+{% include 'navbar.html' %}
 
 <div class="w-1/2 m-auto">
     <h3>Today</h3>
@@ -213,7 +216,11 @@ const ctx = document.getElementById('myChart');
 const carbs_cal = JSON.parse(document.getElementById("carbs_cal").textContent);
 const protein_cal = JSON.parse(document.getElementById("protein_cal").textContent);
 const fat_cal = JSON.parse(document.getElementById("fat_cal").textContent);
-const goal_calories = JSON.parse(document.getElementById("goal.calories").textContent);
+let goal_calories = JSON.parse(document.getElementById("goal.calories").textContent);
+
+if(goal_calories===0){
+  goal_calories=1
+}
 
 const myChart = new Chart(ctx, {
     type: 'doughnut',
