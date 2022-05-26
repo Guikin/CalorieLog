@@ -22,20 +22,6 @@ def tracker(request):
     return render(request,'tracker.html',{'breakfast':breakfast,'lunch':lunch, 'dinner':dinner,'snack':snack,'all_food':all_food})
 
 def add(request):
-    empty_dict = {
-                    'sugar_g': '', 
-                    'fiber_g': '', 
-                    'serving_size_g': '', 
-                    'sodium_mg': '', 
-                    'name': '---', 
-                    'potassium_mg': '',
-                    'fat_saturated_g': '',
-                    'fat_total_g': '-g',
-                    'calories': '--',
-                    'cholesterol_mg': '',
-                    'protein_g': '-g',
-                    'carbohydrates_total_g': '-g'
-                }
     return render(request, 'add.html')
 
 """ def search(request):
