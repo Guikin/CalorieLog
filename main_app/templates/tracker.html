@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
+
 <div class="w-1/2 m-auto">
     <h3>Today</h3>
     <div class="flex justify-around border-2 p-12 rounded-lg">
@@ -8,28 +10,29 @@
 
         <div class="w-1/2 hidden lg:flex flex-col justify-evenly">
             <div>
-                <h2>Carbs</h2>  
+                <h2 class="px-2">Carbohydrates</h2>  
                 <div class="w3-light-grey w3-round-xxlarge">
-                    <div class="w3-container w3-round-xxlarge w3-yellow" style="width:45%">25%
+                    <div class="w3-container w3-round-xxlarge w3-yellow" style="width:{{percent_carbs}}%">{{percent_carbs}}%
                     </div>
                 </div>
             </div>
             
             <div>
-                <h2 class="">Fats</h2>
+                <h2 class="px-2">Fats</h2>
                 <div class="w3-light-grey w3-round-xxlarge "> 
-                    <div class="w3-container w3-round-xxlarge w3-aqua" style="width:15%">25%
+                    <div class="w3-container w3-round-xxlarge w3-aqua" style="width:{{percent_fat}}%">{{percent_fat}}%
                     </div>
                 </div> 
             </div>
             
             <div>
-                <h2 class="">Proteins</h2>
+                <h2 class="px-2">Proteins</h2>
                 <div class="w3-light-grey w3-round-xxlarge "> 
-                    <div class="w3-container w3-round-xxlarge w3-red" style="width:65%">25%
+                    <div class="w3-container w3-round-xxlarge w3-red" style="width:{{percent_protein}}%">{{percent_protein}}%
                     </div>
                 </div>
             </div>
+            <button class="bg-blue-500 w-32 rounded-lg text-white hover:bg-blue-800"><a href="{% url 'goals_update' user.id %}">Edit Goals</a></button>
         </div>
     </div>
 </div>
@@ -39,12 +42,13 @@
         <thead>
           <tr>
             <th class="p-4">Meal</th>
-            <th class="p-4">Quantity<br>g</th>
-            <th class="p-4">Carbs<br>g</th>
-            <th class="p-4">Fat<br>g</th>
-            <th class="p-4">Protein<br>g</th>
-            <th class="p-4">Sodium<br>mg</th>
-            <th class="p-4">Sugar<br>g</th>
+            <th class="p-4">Quantity<br><br></th>
+            <th class="p-4">Calories<br><p class="text-sm font-normal">kcal</p></th>
+            <th class="p-4">Carbs<br><p class="text-sm font-normal">g</p></th>
+            <th class="p-4">Fat<br><p class="text-sm font-normal">g</p></th>
+            <th class="p-4">Protein<br><p class="text-sm font-normal">g</p></th>
+            <th class="p-4">Sodium<br><p class="text-sm font-normal">mg</p></th>
+            <th class="p-4">Sugar<br><p class="text-sm font-normal">g</p></th>
             <th class="p-4"></th>
           </tr>
         </thead>
@@ -52,12 +56,13 @@
 
             <!-- Breakfast -->
             <tr>
-                <td class="p-4 font-bold">BreakFast</td>
+                <td class="p-4 font-bold text-center">BreakFast</td>
             </tr>
             {% for food in breakfast %}
             <tr class="border-b-2">
             <td class="p-4 text-center">{{food.name}}</td>
             <td class="p-4 text-center">{{food.quantity}}</td>
+            <td class="p-4 text-center">{{food.calories}}</td>
             <td class="p-4 text-center">{{food.carbohydrates}}</td> 
             <td class="p-4 text-center">{{food.fat}}</td> 
             <td class="p-4 text-center">{{food.protein}}</td> 
@@ -67,19 +72,22 @@
             <td class="p-4 text-center">X</td> 
           </tr>
           {% endfor %}
-          <tr>
-              <td class="p-4 text-center">add entry</td>
+          <tr class="border-t-2">
+            <td class="p-4 text-center"> <button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+                Add Entry +
+              </button></td>
           </tr>
 
 
           <!-- Lunch -->
           <tr>
-            <td class="p-4 font-bold">Lunch</td>
+            <td class="p-4 font-bold text-center">Lunch</td>
           </tr>
           {% for food in lunch %}
             <tr class="border-b-2">
             <td class="p-4 text-center">{{food.name}}</td>
             <td class="p-4 text-center">{{food.quantity}}</td>
+            <td class="p-4 text-center">{{food.calories}}</td>
             <td class="p-4 text-center">{{food.carbohydrates}}</td> 
             <td class="p-4 text-center">{{food.fat}}</td> 
             <td class="p-4 text-center">{{food.protein}}</td> 
@@ -89,18 +97,21 @@
             <td class="p-4 text-center">X</td> 
           </tr>
           {% endfor %}
-          <tr>
-            <td class="p-4 text-center">add entry</td>
+          <tr class="border-t-2">
+            <td class="p-4 text-center"> <button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+                Add Entry +
+              </button></td>
           </tr>
 
            <!-- dinner -->
            <tr>
-            <td class="p-4 font-bold">dinner</td>
+            <td class="p-4 font-bold text-center">Dinner</td>
           </tr>
           {% for food in dinner %}
             <tr class="border-b-2">
             <td class="p-4 text-center">{{food.name}}</td>
             <td class="p-4 text-center">{{food.quantity}}</td>
+            <td class="p-4 text-center">{{food.calories}}</td>
             <td class="p-4 text-center">{{food.carbohydrates}}</td> 
             <td class="p-4 text-center">{{food.fat}}</td> 
             <td class="p-4 text-center">{{food.protein}}</td> 
@@ -110,49 +121,108 @@
             <td class="p-4 text-center">X</td> 
           </tr>
           {% endfor %}
-          <tr>
-            <td class="p-4 text-center">add entry</td>
+          <tr class="border-t-2">
+            <td class="p-4 text-center"> <button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+                Add Entry +
+              </button></td>
           </tr>
 
            <!-- snack -->
-           <tr>
-            <td class="p-4 font-bold">snack</td>
+           <tr >
+            <td class="p-4 font-bold text-center">Snack</td>
           </tr>
+          {% if not no_snack %}
           {% for food in snack %}
             <tr class="border-b-2">
             <td class="p-4 text-center">{{food.name}}</td>
             <td class="p-4 text-center">{{food.quantity}}</td>
+            <td class="p-4 text-center">{{food.calories}}</td>
             <td class="p-4 text-center">{{food.carbohydrates}}</td> 
             <td class="p-4 text-center">{{food.fat}}</td> 
             <td class="p-4 text-center">{{food.protein}}</td> 
             <td class="p-4 text-center">{{food.sodium}}</td> 
             <td class="p-4 text-center">{{food.sugar}}</td> 
-             
             <td class="p-4 text-center">X</td> 
           </tr>
           {% endfor %}
-          <tr>
-            <td class="p-4 text-center">add entry</td>
+          {% else %}
+           <tr><td class="text-center font-bold" colspan="8">No snacks has been added</td></tr>
+           {% endif %}
+          <tr class="border-t-2 border-b-2">
+            <td class="p-4 text-center"> <button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+                Add Entry +
+              </button></td>
           </tr>
 
-          
-          
-         
-          
-          
         </tbody>
-      </table>
+        <tfoot>
+            <!-- Goals table -->
 
+            <!-- total nutrients -->
+            <tr>
+                <td></td>
+                <td class="p-4 text-center font-bold"> Total</td>
+                <td class="p-4 text-center border-b-2">{{totalcal}}</td>
+                <td class="p-4 text-center border-b-2">{{totalcarbs}}</td>
+                <td class="p-4 text-center border-b-2">{{totalfat}}</td>
+                 <td class="p-4 text-center border-b-2">{{totalprotein}}</td>
+               <!-- <td class="p-4 text-center border-b-2">{{totalsodium}}</td>
+                <td class="p-4 text-center border-b-2">{{totalsugar}}</td> -->
+            </tr>
+
+            <!-- User Goals -->
+            <tr>
+                <td></td>
+                <td class="p-4 text-center font-bold">Your Daily goal</td>
+                {% for goal in goals %}
+                <td class="p-4 text-center border-b-2">{{goal.calories}}</td>
+                <td class="p-4 text-center border-b-2">{{goal.carbs}}</td>
+                <td class="p-4 text-center border-b-2">{{goal.fat}}</td>
+                <td class="p-4 text-center border-b-2">{{goal.protein}}</td>
+                <!--<td class="p-4 text-center border-b-2">{{totalsodium}}</td>
+                <td class="p-4 text-center border-b-2">{{totalsugar}}</td> -->
+                {% endfor %}
+            </tr>
+
+            <!-- remaining -->
+            <tr>
+                <td></td>
+
+                 <td class="p-4 text-center font-bold">Remaining</td>
+                <td class="p-4 text-center font-bold">{{remaining_cal}}</td>
+                <td class="p-4 text-center font-bold">{{remaining_carbs}}</td>
+                <td class="p-4 text-center font-bold">{{remaining_protein}}</td>
+                <td class="p-4 text-center font-bold">{{remaining_fat}}</td> 
+                <!--<td class="p-4 text-center border-b-2">{{totalsodium}}</td>
+                <td class="p-4 text-center border-b-2">{{totalsugar}}</td> -->
+                
+            </tr>
+
+        </tfoot>
+      </table>
+      {{ carbs_cal|json_script:"carbs_cal" }}
+      {{ protein_cal|json_script:"protein_cal" }}
+      {{ fat_cal|json_script:"fat_cal" }}
+      {% for goal in goals %}
+      {{ goal.calories|json_script:"goal.calories" }}
+      {% endfor %}
 </div>
 <script>
 const ctx = document.getElementById('myChart');
+
+const carbs_cal = JSON.parse(document.getElementById("carbs_cal").textContent);
+const protein_cal = JSON.parse(document.getElementById("protein_cal").textContent);
+const fat_cal = JSON.parse(document.getElementById("fat_cal").textContent);
+const goal_calories = JSON.parse(document.getElementById("goal.calories").textContent);
+
 const myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-        labels: ['Carbs', 'Fats', 'Proteins','others'],
+        labels: ['Carbs','Fats', 'Proteins','others'],
         datasets: [{
             label: 'calorieTracker',
-            data: [6,4,2,10],
+            
+            data: [carbs_cal,fat_cal,protein_cal,goal_calories],
             backgroundColor: [
                 'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',

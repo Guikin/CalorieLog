@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="text-center pt-32 text-xl font-bold">Edit Goals</h1>
+
+<div class="flex justify-around flex-row-reverse m-auto w-1/2 items-center pt-6">
+    <div class="flex flex-col justify-center lg:justify-start">
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+                <tbody>
+                    <tr>
+                        <th><label class="text-sm pr-4" for="id_calories">Calories:</label></th>
+                        <td>
+                            <input class="form-control block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded" type="number" name="calories" value="{{goals.calories}}" step="any" required="" id="id_calories">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label class="text-sm" for="id_carbs">Carbs:</label></th>
+                        <td>
+                            <input class="form-control block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded" type="number" name="carbs" value="{{goals.carbs}}" step="any" required="" id="id_carbs">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label class="text-sm pl-4" for="id_fat">Fat:</label></th>
+                        <td>
+                            <input class="form-control block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded" type="number" name="fat" value="{{goals.fat}}" step="any" required="" id="id_fat">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label class="text-sm pr-4" for="id_protein">Protein:</label></th>
+                        <td>
+                            <input class="form-control block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded" type="number" name="protein" value="{{goals.protein}}" step="any" required="" id="id_protein">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pt-8 mx-20 pl-2">
+            <input type="submit" value="Submit" class="btn bg-yellow-400 hover:bg-yellow-300 text-black text-sm block px-4 py-2 rounded w-32">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
