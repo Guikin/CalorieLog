@@ -15,8 +15,8 @@ def home(request):
     print('test')
     return render(request,'home.html')
 
-def delete(request):
-    pass    
+# def delete(request):
+#     pass    
 
 #filtered all foods by meals for easier layout rendering
 def tracker(request):
