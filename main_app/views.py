@@ -12,7 +12,6 @@ from django.views.generic.edit import UpdateView
 
 # Create your views here.
 def home(request):
-    print('test')
     return render(request,'home.html')
 
 def delete(request,food_id):
@@ -146,7 +145,6 @@ def tracker(request):
 def add(request,meal_id):
     return render(request, 'add.html', {'meal_id':meal_id})
 
-
 def search(request):
     query = request.GET['query']
     apiKey = 'pbtYsqSI82E2sTITqV3NBEeBUwsun0ifPoP5cs5a'
@@ -177,7 +175,55 @@ def display(request, id):
             nutrients['carbs'] = i['amount']
         if i['nutrient']['name'] == 'Protein':
             nutrients['protein'] = i['amount']
-    return render(request, 'add.html', nutrients,)
+        if i['nutrient']['name'] == 'Fiber, total dietary':
+            nutrients['fiber'] = i['amount']
+        if i['nutrient']['name'] == 'Sodium, Na':
+            nutrients['sodium'] = i['amount']
+        if i['nutrient']['name'] == 'Cholesterol':
+            nutrients['cholesterol'] = i['amount']
+        if i['nutrient']['name'] == 'Sugars, Total NLEA':
+            nutrients['sugar'] = i['amount']
+    return render(request, 'add.html', nutrients)
+
+def append(request):
+    if request.POST:
+        data = request.POST.dict()
+        if data['meals'] == 'breakfast':
+            data['meals'] = 'B'
+        elif data['meals'] == 'lunch':
+            data['meals'] = 'L'
+        elif data['meals'] == 'dinner':
+            data['meals'] = 'D'
+        else:
+            data['meals'] = 'S'
+        meal=Meal.objects.get(name=data['meals']).food_set.create(
+            name=data['food_name'],
+            sugar=data['sugar'],
+            sodium=data['sodium'],
+            fiber=data['fiber'],
+            quantity= str(int(data['quantity'])*int(data['serving'])),
+            fat=data['fats'],
+            cholesterol=data['cholesterol'],
+            protein=data['protein'],
+            carbohydrates=data['carbs'],
+            calories=data['calories'],
+            user=request.user)
+        # food = Food.objects.create(
+        #     name=data['food_name'],
+        #     sugar=data['sugar'],
+        #     sodium=data['sodium'],
+        #     fiber=data['fiber'],
+        #     quantity= str(int(data['quantity'])*int(data['serving'])),
+        #     fat=data['fats'],
+        #     cholesterol=data['cholesterol'],
+        #     protein=data['protein'],
+        #     carbohydrates=data['carbs'],
+        #     calories=data['calories'],
+        #     user=request.user,
+        # )
+        print(meal)
+        
+    return redirect('/tracker/')
     
     
     
