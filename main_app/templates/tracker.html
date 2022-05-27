@@ -7,13 +7,22 @@
 {% include 'navbar.html' %}
 
 <div class="w-full sm:w-1/2 m-auto">
-    <h3>Today</h3>
-    <div class="sm:flex justify-around border-2 p-12 rounded-lg">
-        <canvas id="myChart" class="md:w-1/4"></canvas>
-
-        <div class="sm:w-1/2 lg:flex flex-col justify-evenly">
+    <!-- <h3>Today</h3> -->
+    <div class="xl:flex justify-around border-2 p-2 rounded-lg">
+      <div class="5xl:w-1/4 -translate-y-10 ">
+        {% for goal in goals %}
+        <p class=" hidden xl:block relative text-center" style="left:0%; top:56%;"><span class='font-bold text-2xl p-0 m-0'>{{remaining_cal}}</span><br> out of <span class="font-bold text-xl p-0 m-0">{{ goal.calories }}</span><br><span class="font-bold text-xl p-0 m-0">Calories</span></p>
+        {% endfor %}
+        <canvas class="p-0 m-0" id="myChart" ></canvas>
+        </div>
+        {% for goal in goals %}
+        <div class="2xl:w-1/2 lg:flex flex-col justify-evenly">
             <div>
-                <h2 class="px-2">Carbohydrates</h2>  
+              <div class="flex justify-between">
+                <h2 class="px-2">Carbohydrates</h2>
+                
+                <p>{{ totalcarbs }} / {{ goal.carbs }}</p>
+              </div> 
                 <div class="w3-light-grey w3-round-xxlarge">
                     <div class="w3-container w3-round-xxlarge w3-yellow" style="width:{{percent_carbs}}%">{{percent_carbs}}%
                     </div>
@@ -21,7 +30,10 @@
             </div>
             
             <div>
+              <div class="flex justify-between">
                 <h2 class="px-2">Fats</h2>
+                <p>{{ totalfat }} / {{ goal.fat }}</p>
+              </div>
                 <div class="w3-light-grey w3-round-xxlarge "> 
                     <div class="w3-container w3-round-xxlarge w3-aqua" style="width:{{percent_fat}}%">{{percent_fat}}%
                     </div>
@@ -29,12 +41,17 @@
             </div>
             
             <div>
+              <div class="flex justify-between">
                 <h2 class="px-2">Proteins</h2>
+                <p>{{ totalprotein }} / {{ goal.proteins }}</p>
+              </div>
                 <div class="w3-light-grey w3-round-xxlarge "> 
                     <div class="w3-container w3-round-xxlarge w3-red" style="width:{{percent_protein}}%">{{percent_protein}}%
                     </div>
                 </div>
             </div>
+
+            {% endfor %}
             <button class="bg-blue-500 p-2 w-32 rounded-lg text-white hover:bg-blue-800"><a href="{% url 'goals_update' user.id %}">Edit Goals</a></button>
         </div>
     </div>
@@ -45,7 +62,7 @@
         <thead>
           <tr>
             <th class="p-4">Meal</th>
-            <th class="p-4">Quantity<br><br></th>
+            <th class="p-4">Quantity<br><p class="text-sm font-normal">G</p></th>
             <th class="p-4">Calories<br><p class="text-sm font-normal">kcal</p></th>
             <th class="p-4">Carbs<br><p class="text-sm font-normal">g</p></th>
             <th class="p-4">Fat<br><p class="text-sm font-normal">g</p></th>
@@ -61,6 +78,7 @@
             <tr>
                 <td class="p-4 font-bold text-center">BreakFast</td>
             </tr>
+            {% if not no_breakfast %}
             {% for food in breakfast %}
             <tr class="border-b-2">
             <td class="p-4 text-center">{{food.name}}</td>
@@ -72,13 +90,19 @@
             <td class="p-4 text-center">{{food.sodium}}</td> 
             <td class="p-4 text-center">{{food.sugar}}</td> 
             
-            <td class="p-4 text-center">X</td> 
+            <td><form action="{% url 'delete_food' food.id %}">
+              <input type="submit" class="p-4 text-3xl text-rose-600 text-center" value="⊖"></input></form></td> 
+
           </tr>
           {% endfor %}
+          {% else %}
+           <tr><td class="text-center font-bold" colspan="8">No Breakfast has been added</td></tr>
+           {% endif %}
+
           <tr class="border-t-2">
-            <td class="p-4 text-center"> <button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
-                Add Entry +
-              </button></td>
+            <td class="p-4 text-center"><a href="{% url 'add' 1%}"><button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+              Add Entry ⨁
+            </button></a></td>
           </tr>
 
 
@@ -86,6 +110,7 @@
           <tr>
             <td class="p-4 font-bold text-center">Lunch</td>
           </tr>
+          {% if not no_lunch %}
           {% for food in lunch %}
             <tr class="border-b-2">
             <td class="p-4 text-center">{{food.name}}</td>
@@ -97,20 +122,26 @@
             <td class="p-4 text-center">{{food.sodium}}</td> 
             <td class="p-4 text-center">{{food.sugar}}</td> 
             
-           
+            <td><form action="{% url 'delete_food' food.id %}">
+              <input type="submit" class="p-4 text-3xl text-rose-600 text-center" value="⊖"></input></form></td> 
           
           </tr>
           {% endfor %}
+          {% else %}
+           <tr><td class="text-center font-bold" colspan="8">No Lunch has been added</td></tr>
+           {% endif %}
+
           <tr class="border-t-2">
-            <td class="p-4 text-center"> <button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
-                Add Entry +
-              </button></td>
+            <td class="p-4 text-center"><a href="{% url 'add' 2%}"><button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+              Add Entry ⨁
+            </button></a></td>
           </tr>
 
            <!-- dinner -->
            <tr>
             <td class="p-4 font-bold text-center">Dinner</td>
           </tr>
+          {% if not no_dinner %}
           {% for food in dinner %}
             <tr class="border-b-2">
             <td class="p-4 text-center">{{food.name}}</td>
@@ -122,13 +153,18 @@
             <td class="p-4 text-center">{{food.sodium}}</td> 
             <td class="p-4 text-center">{{food.sugar}}</td> 
              
-            <td class="p-4 text-center">X</td> 
+            <td><form action="{% url 'delete_food' food.id %}">
+              <input type="submit" class="p-4 text-3xl text-rose-600 text-center" value="⊖"></input></form></td> 
           </tr>
           {% endfor %}
+          {% else %}
+           <tr><td class="text-center font-bold" colspan="8">No Dinner has been added</td></tr>
+           {% endif %}
+
           <tr class="border-t-2">
-            <td class="p-4 text-center"> <button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
-                Add Entry +
-              </button></td>
+            <td class="p-4 text-center"><a href="{% url 'add' 3%}"><button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+                Add Entry ⨁
+              </button></a></td>
           </tr>
 
            <!-- snack -->
@@ -146,16 +182,19 @@
             <td class="p-4 text-center">{{food.protein}}</td> 
             <td class="p-4 text-center">{{food.sodium}}</td> 
             <td class="p-4 text-center">{{food.sugar}}</td> 
-            <td class="p-4 text-center">X</td> 
+            
+            <td><form action="{% url 'delete_food' food.id %}">
+              <input type="submit" class="p-4 text-3xl text-rose-600 text-center" value="⊖"></input></form></td> 
+
           </tr>
           {% endfor %}
           {% else %}
-           <tr><td class="text-center font-bold" colspan="8">No snacks has been added</td></tr>
+           <tr><td class="text-center font-bold" colspan="8">No Snacks has been added</td></tr>
            {% endif %}
           <tr class="border-t-2 border-b-2">
-            <td class="p-4 text-center"> <button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
-                Add Entry +
-              </button></td>
+            <td class="p-4 text-center"><a href="{% url 'add' 4%}"><button class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded">
+              Add Entry ⨁
+            </button></a></td>
           </tr>
 
         </tbody>
@@ -183,7 +222,7 @@
                 <td class="p-4 text-center border-b-2">{{goal.carbs}}</td>
                 <td class="p-4 text-center border-b-2">{{goal.fat}}</td>
                 <td class="p-4 text-center border-b-2">{{goal.protein}}</td>
-                <!--<td class="p-4 text-center border-b-2">{{totalsodium}}</td>
+                <!-- <td class="p-4 text-center border-b-2">{{totalsodium}}</td>
                 <td class="p-4 text-center border-b-2">{{totalsugar}}</td> -->
                 {% endfor %}
             </tr>
@@ -197,9 +236,8 @@
                 <td class="p-4 text-center font-bold">{{remaining_carbs}}</td>
                 <td class="p-4 text-center font-bold">{{remaining_protein}}</td>
                 <td class="p-4 text-center font-bold">{{remaining_fat}}</td> 
-                <!--<td class="p-4 text-center border-b-2">{{totalsodium}}</td>
-                <td class="p-4 text-center border-b-2">{{totalsugar}}</td> -->
-                
+                <!-- <td class="p-4 text-center font-bold">{{totalsodium}}</td>
+                <td class="p-4 text-center font-bold">{{totalsugar}}</td> -->
             </tr>
 
         </tfoot>
@@ -226,7 +264,7 @@ if(goal_calories===0){
 const myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-        labels: ['Carbs','Fats', 'Proteins','others'],
+        labels: ['Carbs','Fats', 'Proteins','Remain'],
         datasets: [{
             label: 'calorieTracker',
             
@@ -247,7 +285,8 @@ const myChart = new Chart(ctx, {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
-            hoverOffset: 4
+            hoverOffset: 4,
+            cutout:'80%'
         }]
     },
 });

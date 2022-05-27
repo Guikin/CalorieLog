@@ -18,7 +18,7 @@
         <div class="flex">
             <div class="w-6/12 border border-black rounded-md h-80 mr-8 overflow-y-auto">
                 {% for food in food_dict %}
-                <form method="GET", action="{% url 'view' food.id %}" class="flex justify-between p-3 border-b-2 border-black hover:bg-amber-200">
+                <form method="GET", action="{% url 'view' food.id  meal_id %}" class="flex justify-between p-3 border-b-2 border-black hover:bg-amber-200">
                     <label name="name">{{food.name}}</label>
                     <button type="submit" class="ml-8 border border-black rounded-md px-2 py-1 hover:bg-amber-500">View</button>
                 </form>
@@ -33,10 +33,35 @@
                     <div class="flex justify-between mb-6">
                         <label class="text-base">Add to</label>
                         <select name="meals" class="py-1 rounded-md">
-                            <option value="breakfast">Breakfast</option>
-                            <option value="lunch">Lunch</option>
-                            <option value="dinner">Dinner</option>
-                            <option value="snacks">Snacks</option>
+
+                            {% if meal_id == 1 %}
+                            <option selected value="breakfast">Breakfast</option>
+                             {% else %}
+                             <option value="breakfast">Breakfast</option>
+                             {% endif %}
+                            
+
+                             {% if meal_id == 2 %}
+                            <option selected value="lunch">Lunch</option>
+                             {% else %}
+                             <option value="lunch">Lunch</option>
+                             {% endif %}
+                             
+                            
+                             {% if meal_id == 3 %}
+                            <option selected value="dinner">Dinner</option>
+                             {% else %}
+                             <option  value="dinner">Dinner</option>
+                             {% endif %}
+
+
+                             {% if meal_id == 4 %}
+                            <option selected value="snacks">Snacks</option>
+                             {% else %}
+                             <option  value="snacks">Snacks</option>
+                             {% endif %}
+
+                            
                         </select>
                     </div>
                     <div class="flex justify-between mb-6">

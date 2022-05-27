@@ -5,10 +5,10 @@ urlpatterns=[
     path('',views.home, name='home'),
     path('tracker/',views.tracker, name='tracker'),
     path('account/', include('django.contrib.auth.urls')),
-    path('add/', views.add, name='add'),
+    path('add/<int:meal_id>', views.add, name='add'),
     path('search/', views.search, name='search'),
     path('view/<int:id>/', views.display, name='view'),
-    # path('tracker/<int:food_id>/delete',views.delete, name='delete_food'),
+    path('tracker/<int:food_id>/delete',views.delete, name='delete_food'),
 
     # Auth
     path('accounts/signup/', views.signup, name='signup'),

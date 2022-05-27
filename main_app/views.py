@@ -15,8 +15,11 @@ def home(request):
     print('test')
     return render(request,'home.html')
 
-# def delete(request):
-#     pass    
+def delete(request,food_id):
+    delete_food = Food.objects.get(id=food_id).delete()
+    
+    return redirect('/tracker/')
+
 
 #filtered all foods by meals for easier layout rendering
 def tracker(request):
@@ -140,8 +143,8 @@ def tracker(request):
 
 
 
-def add(request):
-    return render(request, 'add.html')
+def add(request,meal_id):
+    return render(request, 'add.html', {'meal_id':meal_id})
 
 
 def search(request):
@@ -156,7 +159,7 @@ def search(request):
         dictionary['id'] = item['fdcId']
         foods.append(dictionary)
         if len(foods) > 50: break
-    return render(request, 'add.html', {'food_dict':foods})
+    return render(request, 'add.html', {'food_dict':foods,})
 
 def display(request, id):
     apiKey = 'pbtYsqSI82E2sTITqV3NBEeBUwsun0ifPoP5cs5a'
@@ -174,7 +177,7 @@ def display(request, id):
             nutrients['carbs'] = i['amount']
         if i['nutrient']['name'] == 'Protein':
             nutrients['protein'] = i['amount']
-    return render(request, 'add.html', nutrients)
+    return render(request, 'add.html', nutrients,)
     
     
     
