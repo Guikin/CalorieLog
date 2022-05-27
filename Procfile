@@ -1,1 +1,1 @@
-web: gunicorn calorielog.wsgi
+web: gunicorn CalorieLog.wsgi
