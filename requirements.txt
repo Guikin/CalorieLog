@@ -13,7 +13,6 @@ chardet==3.0.4
 Click==7.0
 colorama==0.4.3
 colour==0.1.5
-command-not-found==0.3
 commonmark==0.9.1
 cryptography==2.8
 cupshelpers==1.0
