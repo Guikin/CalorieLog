@@ -1,5 +1,4 @@
 # CalorieLog
-# CalorieLog
 ![image](https://user-images.githubusercontent.com/102340067/170546953-8d3ec5fa-db19-4147-a5d9-f80b61804b18.png)
 
 # Getting Started
