@@ -38,12 +38,12 @@ def tracker(request):
     
     # calculates total of nutrients for total table
     for food in all_food:
-        totalcal+= food.calories
-        totalcarbs += food.carbohydrates
-        totalfat += food.fat
-        totalprotein += food.protein
-        totalsodium += food.sodium
-        totalsugar += food.sugar
+        totalcal = round((totalcal + food.calories),1)
+        totalcarbs =round((totalcarbs+ food.carbohydrates),1)
+        totalfat = round((totalfat + food.fat),1)
+        totalprotein =round((totalprotein + food.protein),1)
+        totalsodium = round((totalsodium + food.sodium),1)
+        totalsugar = round((totalsugar + food.sugar),1)
 
     def fat_to_cal(amount):
         return amount * 9    
@@ -70,22 +70,24 @@ def tracker(request):
     # calculates perentage for progress bar
     if len(goals)!=0 and len(all_food)!=0:
         for goal in goals:
-            remaining_cal = goal.calories - totalcal 
-            remaining_carbs = goal.carbs - totalcarbs 
-            remaining_protein = goal.protein - totalprotein
-            remaining_fat = goal.fat - totalfat
+            remaining_cal = round((goal.calories - totalcal),1)
+            remaining_carbs = round((goal.carbs - totalcarbs),1) 
+            remaining_protein = round((goal.protein - totalprotein),1)
+            remaining_fat = round((goal.fat - totalfat),1)
             if(goal.protein != 0):
-             percent_protein = round(totalprotein/goal.protein *100)
+             percent_protein = round((totalprotein/goal.protein *100),1)
             if(goal.carbs !=0):
-             percent_carbs = round(totalcarbs/goal.carbs *100)
+             percent_carbs = round((totalcarbs/goal.carbs *100),1)
             if(goal.fat): 
-             percent_fat = round(totalfat/goal.fat *100)
+             percent_fat = round((totalfat/goal.fat *100),1)
         
 
     no_breakfast = None        
     no_lunch = None        
     no_dinner = None        
     no_snack = None
+
+   
             
     # filter by meals for better layout rendering
     breakfast = Meal.objects.get(name='B').food_set.filter(user=request.user)
@@ -208,6 +210,7 @@ def append(request):
             carbohydrates=data['carbs'],
             calories=data['calories'],
             user=request.user)
+
         # food = Food.objects.create(
         #     name=data['food_name'],
         #     sugar=data['sugar'],

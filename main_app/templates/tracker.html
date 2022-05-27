@@ -24,7 +24,7 @@
                 <p>{{ totalcarbs }} / {{ goal.carbs }}</p>
               </div> 
                 <div class="w3-light-grey w3-round-xxlarge">
-                    <div class="w3-container w3-round-xxlarge w3-yellow" style="width:{{percent_carbs}}%">{{percent_carbs}}%
+                    <div class="w3-container w3-round-xxlarge w3-yellow " style="width:{{percent_carbs}}%; max-width:100%">{{percent_carbs}}%
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <p>{{ totalfat }} / {{ goal.fat }}</p>
               </div>
                 <div class="w3-light-grey w3-round-xxlarge "> 
-                    <div class="w3-container w3-round-xxlarge w3-aqua" style="width:{{percent_fat}}%">{{percent_fat}}%
+                    <div class="w3-container w3-round-xxlarge w3-aqua" style="width:{{percent_fat}}%; max-width:100%">{{percent_fat}}%
                     </div>
                 </div> 
             </div>
@@ -43,10 +43,10 @@
             <div>
               <div class="flex justify-between">
                 <h2 class="px-2">Proteins</h2>
-                <p>{{ totalprotein }} / {{ goal.proteins }}</p>
+                <p>{{ totalprotein }} / {{ goal.protein }}</p>
               </div>
                 <div class="w3-light-grey w3-round-xxlarge "> 
-                    <div class="w3-container w3-round-xxlarge w3-red" style="width:{{percent_protein}}%">{{percent_protein}}%
+                    <div class="w3-container w3-round-xxlarge w3-red" style="width:{{percent_protein}}%; max-width:100%">{{percent_protein}}%
                     </div>
                 </div>
             </div>
@@ -245,9 +245,9 @@
       {{ carbs_cal|json_script:"carbs_cal" }}
       {{ protein_cal|json_script:"protein_cal" }}
       {{ fat_cal|json_script:"fat_cal" }}
-      {% for goal in goals %}
-      {{ goal.calories|json_script:"goal.calories" }}
-      {% endfor %}
+      
+      {{ remaining_cal|json_script:"remaining_cal"}}
+      
 </div>
 <script>
 const ctx = document.getElementById('myChart');
@@ -255,10 +255,10 @@ const ctx = document.getElementById('myChart');
 const carbs_cal = JSON.parse(document.getElementById("carbs_cal").textContent);
 const protein_cal = JSON.parse(document.getElementById("protein_cal").textContent);
 const fat_cal = JSON.parse(document.getElementById("fat_cal").textContent);
-let goal_calories = JSON.parse(document.getElementById("goal.calories").textContent);
+let remaining_cal = JSON.parse(document.getElementById("remaining_cal").textContent);
 
-if(goal_calories===0){
-  goal_calories=1
+if(remaining_cal===0){
+  remaining_cal=1
 }
 
 const myChart = new Chart(ctx, {
@@ -268,7 +268,7 @@ const myChart = new Chart(ctx, {
         datasets: [{
             label: 'calorieTracker',
             
-            data: [carbs_cal,fat_cal,protein_cal,goal_calories],
+            data: [carbs_cal,fat_cal,protein_cal,remaining_cal],
             backgroundColor: [
                 'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
