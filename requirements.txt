@@ -85,7 +85,6 @@ systemd-python==234
 testresources==2.0.1
 tqdm==4.64.0
 typing-extensions==3.10.0.2
-ubuntu-advantage-tools==27.8
 ubuntu-drivers-common==0.0.0
 ufw==0.36
 unattended-upgrades==0.1
