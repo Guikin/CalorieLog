@@ -1,5 +1,7 @@
 # CalorieLog
 ![image](https://user-images.githubusercontent.com/102340067/170546953-8d3ec5fa-db19-4147-a5d9-f80b61804b18.png)
+![image](https://user-images.githubusercontent.com/102340067/170723401-90024073-0391-4b75-822a-396edd7314dd.png)
+
 UX Designers - Isaac Tam, Marley Sinwah\
 Developers - Jean Thomas, Ziyad Tahlilkar, Vincent Vuong
 
