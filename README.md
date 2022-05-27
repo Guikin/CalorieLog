@@ -28,7 +28,10 @@ Amid all the meals, we fail to understand the amount of nutrition we consume dai
 * CSS
 * Google
 * Stack Overflow
-
+* Charts.Js
+* SQL
+* W3Schools css
+* JSON
 ### Next Steps - Ice Box items
 * Creating/adding recipes
 * Mobile App
