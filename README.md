@@ -2,7 +2,7 @@
 ![image](https://user-images.githubusercontent.com/102340067/170546953-8d3ec5fa-db19-4147-a5d9-f80b61804b18.png)
 
 # Getting Started
-* [Click here](https://calorielog.herokuapp.com/) to access Calorie Log
+* [Calorie Log](https://calorielog.herokuapp.com/) - Hosted on Heroku
 * [Trello Board](https://trello.com/b/jdQe8qC3/calorie-log)
 * [ERD](https://lucid.app/lucidchart/cbba305d-2d9a-419c-acc8-c32ebb34e457/edit?invitationId=inv_f5361375-6547-41d6-b829-b84edf0b6972&referringApp=slack&page=0_0#)
 * [Figma](https://www.figma.com/file/DgQ8AjleV5dQ2SfKZU7zaG/SEI-UXDI-Collabathon)
